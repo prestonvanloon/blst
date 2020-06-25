@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include "exports.c"
+
 /*
  * Usage pattern on single-processor system is
  *
