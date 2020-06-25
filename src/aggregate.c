@@ -6,6 +6,9 @@
 
 #include "errors.h"
 #include "exports.c"
+#include "point.h"
+#include "e1.c"
+#include "e2.c"
 
 /*
  * Usage pattern on single-processor system is
