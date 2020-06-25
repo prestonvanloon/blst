@@ -16,6 +16,7 @@
  */
 
 #include "fields.h"
+#include "point.h"
 
 /*
  * BLS12-381-specifc Fr shortcuts to assembly.
