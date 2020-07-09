@@ -3,7 +3,6 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 go_library(
     name = "go_default_library",
     srcs = [
-        # "assembly.S",
         "blst.go",
         "server.c",
     ],
@@ -31,4 +30,7 @@ go_test(
         "blst_minsig_test.go",
     ],
     embed = [":go_default_library"],
+    data = glob([
+        "hash_to_curve/*.json",
+    ]),
 )
