@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        # "assembly.S",
+        "blst.go",
+        "server.c",
+    ],
+    cgo = True,
+    copts = [
+        "-Ibindings/go/bindings -Ibindings/go/build -Ibindings/go/src -D__BLST_CGO__ -march=native",
+        "-Ibindings",
+        "-Isrc"
+    ] + select({
+        "@io_bazel_rules_go//go/platform:amd64": [
+            "-mno-avx",
+        ],
+        "//conditions:default": [],
+    }),
+    cdeps = ["//bindings:blst"],
+    importpath = "github.com/supranational/blst/bindings/go",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "blst_htoc_test.go",
+        "blst_minpk_test.go",
+        "blst_minsig_test.go",
+    ],
+    embed = [":go_default_library"],
+)

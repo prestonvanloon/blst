@@ -1,0 +1,18 @@
+# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
+cc_library(
+    name = "blst",
+    srcs = [
+        "blst.h",
+        "blst_aux.h",
+    ],
+    hdrs = [
+        "blst.h",
+        "blst_aux.h",
+    ],
+    deps = [
+        "//src:src",
+        "//build:asm",
+    ],
+    linkstatic = False,
+    visibility = ["//visibility:public"],
+)

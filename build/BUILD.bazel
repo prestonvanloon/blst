@@ -1,0 +1,31 @@
+cc_library(
+    name = "foo",
+    srcs = [
+        "elf/add_mod_384-x86_64.s",
+    ],
+    deps = ["//src:src"],
+)
+
+cc_library(
+    name = "elf_x86",
+    hdrs = glob(["elf/*-x86_64.s"]),
+)
+
+cc_library(
+    name = "asm",
+    srcs = [
+        "assembly.S",
+    ],
+    copts = [
+        "-march=native",
+    ] + select({
+        "@io_bazel_rules_go//go/platform:amd64": [
+            "-mno-avx",
+        ],
+        "//conditions:default": [],
+    }),
+    hdrs = [":elf_x86"],
+    deps = [":elf_x86"],
+    linkstatic = True,
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,131 @@
+# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
+package(default_visibility = ["//visibility:private"])
+
+cc_library(
+    name = "keygen",
+    srcs = ["keygen.c"],
+    deps = [":hdrs"],
+    hdrs = ["keygen.c"],
+)
+
+cc_library(
+    name = "hash_to_field",
+    srcs = ["hash_to_field.c"],
+    deps = [":hdrs"],
+    hdrs = ["hash_to_field.c"],
+)
+
+cc_library(
+    name = "e1",
+    srcs = ["e1.c"],
+    deps = [":hdrs"],
+    hdrs = [
+        "e1.c",
+        "e2.c",
+    ],
+)
+
+cc_library(
+    name = "exp",
+    srcs = ["exp.c"],
+    deps = [":hdrs"],
+    hdrs = ["exp.c"],
+)
+
+cc_library(
+    name = "map_to_g1",
+    srcs = ["map_to_g1.c"],
+    deps = [":hdrs"],
+    hdrs = ["map_to_g1.c"],
+)
+
+# cc_library(
+#     name = "e2",
+#     srcs = ["e2.c"],
+#     deps = [":hdrs"],
+#     hdrs = ["e2.c"],
+# )
+
+cc_library(
+    name = "exp2",
+    srcs = ["exp2.c"],
+    deps = [":hdrs"],
+    hdrs = ["exp2.c"],
+    copts = ["-c"],
+)
+
+cc_library(
+    name = "hdrs",
+    hdrs = glob(["*.h"]),
+)
+
+cc_library(
+    name = "hdrs2",
+    hdrs = glob(
+        [
+            "*.c",
+            "*.h",
+        ],
+        exclude = [
+            "server.c",
+            "client_*.c",
+        ],
+    ),
+)
+
+cc_library(
+    name = "src",
+    srcs = [
+        "server.c",
+        # "hash_to_field.c",
+        # "e1.c",
+        # "exp.c",
+        # "map_to_g1.c",
+        # "e2.c",
+        # "exp2.c",
+        # "map_to_g2.c",
+        # "fp12_tower.c",
+        # "pairing.c",
+        # "aggregate.c",
+        # "consts.c",
+        # "vect.c",
+        # "exports.c",
+
+        # "point.h",
+        # "vect.h",
+        # "consts.h",
+        # "fields.h",
+        # "sqrt2-addchain.h",
+        # "sha256.h",
+        # "errors.h",
+        # "ec_ops.h",
+        # "ec_mult.h",
+        # "recip-addchain.h",
+        # "sqrt-addchain.h",
+
+        # "vect.h",
+        # "sha256.h",
+    ],
+    # ] + glob([
+    #     "*.c",
+    #     "*.h",
+    # ], exclude = [
+    #     "server.c",
+    #     "client_*.c",
+    # ]),
+    copts = [
+        # "-c", # Compile only, no link.
+        # "-iquote src",
+        # "-iquote ./",
+        # "-Isrc",
+        # "-iquote $(BINDIR)",
+        # "-Wno-unused-function",
+        # "-Wno-all", # debug only!
+        # "-march=native",
+        # "-fPIC",
+    ],
+    deps = [
+        ":hdrs2",
+    ],
+    visibility = ["//visibility:public"],
+)
