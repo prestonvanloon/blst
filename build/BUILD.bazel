@@ -1,12 +1,4 @@
 cc_library(
-    name = "foo",
-    srcs = [
-        "elf/add_mod_384-x86_64.s",
-    ],
-    deps = ["//src:src"],
-)
-
-cc_library(
     name = "elf_x86",
     hdrs = glob(["elf/*-x86_64.s"]),
 )
