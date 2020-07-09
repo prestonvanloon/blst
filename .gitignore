@@ -61,3 +61,6 @@ dkms.conf
 Cargo.lock
 bindings/rust/target
 bindings/rust/blst
+
+# Bazel build
+bazel-*
